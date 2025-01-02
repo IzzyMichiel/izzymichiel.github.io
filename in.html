@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Eigenschappen Checklist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+        }
+        .checkbox-group {
+            max-height: 500px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            font-size: 16px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mijn Eigenschappen</h1>
+    <p>Selecteer de eigenschappen die bij jou passen. De keuzes verschijnen automatisch in het tekstvak hieronder.</p>
+    <div class="checkbox-group" id="checkboxGroup">
+        <!-- Eigenschappenlijst -->
+        <label><input type="checkbox" value="Ambitieus"> Ambitieus</label><br>
+        <label><input type="checkbox" value="Analytisch"> Analytisch</label><br>
+        <label><input type="checkbox" value="Avontuurlijk"> Avontuurlijk</label><br>
+        <label><input type="checkbox" value="Behulpzaam"> Behulpzaam</label><br>
+        <label><input type="checkbox" value="Betrouwbaar"> Betrouwbaar</label><br>
+        <label><input type="checkbox" value="Creatief"> Creatief</label><br>
+        <label><input type="checkbox" value="Doorzetter"> Doorzetter</label><br>
+        <label><input type="checkbox" value="Empathisch"> Empathisch</label><br>
+        <label><input type="checkbox" value="Eerlijk"> Eerlijk</label><br>
+        <label><input type="checkbox" value="Geduldig"> Geduldig</label><br>
+        <label><input type="checkbox" value="Georganiseerd"> Georganiseerd</label><br>
+        <label><input type="checkbox" value="Gestructureerd"> Gestructureerd</label><br>
+        <label><input type="checkbox" value="Grappig"> Grappig</label><br>
+        <label><input type="checkbox" value="Integer"> Integer</label><br>
+        <label><input type="checkbox" value="Kalm"> Kalm</label><br>
+        <label><input type="checkbox" value="Leergierig"> Leergierig</label><br>
+        <label><input type="checkbox" value="Loyaal"> Loyaal</label><br>
+        <label><input type="checkbox" value="Nauwkeurig"> Nauwkeurig</label><br>
+        <label><input type="checkbox" value="Open-minded"> Open-minded</label><br>
+        <label><input type="checkbox" value="Optimistisch"> Optimistisch</label><br>
+        <label><input type="checkbox" value="Punctueel"> Punctueel</label><br>
+        <label><input type="checkbox" value="Realistisch"> Realistisch</label><br>
+        <label><input type="checkbox" value="Rustig"> Rustig</label><br>
+        <label><input type="checkbox" value="Sociaal"> Sociaal</label><br>
+        <label><input type="checkbox" value="Spontaan"> Spontaan</label><br>
+        <label><input type="checkbox" value="Vrolijk"> Vrolijk</label><br>
+        <label><input type="checkbox" value="Zelfstandig"> Zelfstandig</label><br>
+        <label><input type="checkbox" value="Zorgzaam"> Zorgzaam</label><br>
+        <label><input type="checkbox" value="Initiatiefrijk"> Initiatiefrijk</label><br>
+        <label><input type="checkbox" value="Tactvol"> Tactvol</label><br>
+        <label><input type="checkbox" value="Doorgronden"> Doorgronden</label><br>
+        <label><input type="checkbox" value="Volhardend"> Volhardend</label><br>
+        <label><input type="checkbox" value="Vergevingsgezind"> Vergevingsgezind</label><br>
+        <label><input type="checkbox" value="Vindingrijk"> Vindingrijk</label><br>
+        <label><input type="checkbox" value="Pragmatisch"> Pragmatisch</label><br>
+        <label><input type="checkbox" value="Hulpvaardig"> Hulpvaardig</label><br>
+        <label><input type="checkbox" value="Gevoelig"> Gevoelig</label><br>
+        <label><input type="checkbox" value="Oplettend"> Oplettend</label><br>
+        <label><input type="checkbox" value="Enthousiast"> Enthousiast</label><br>
+        <label><input type="checkbox" value="Dapper"> Dapper</label><br>
+        <label><input type="checkbox" value="Verantwoordelijk"> Verantwoordelijk</label><br>
+        <label><input type="checkbox" value="Vastberaden"> Vastberaden</label><br>
+        <label><input type="checkbox" value="Gedisciplineerd"> Gedisciplineerd</label><br>
+        <label><input type="checkbox" value="Innovatief"> Innovatief</label><br>
+        <label><input type="checkbox" value="Visionair"> Visionair</label><br>
+        <label><input type="checkbox" value="Sociaal bewust"> Sociaal bewust</label><br>
+        <label><input type="checkbox" value="Empowerend"> Empowerend</label><br>
+        <!-- Je kunt meer eigenschappen toevoegen als je wilt -->
+    </div>
+    <textarea id="output" readonly placeholder="Je keuzes verschijnen hier..."></textarea>
+
+    <script>
+        document.getElementById('checkboxGroup').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const selectedValues = Array.from(checkboxes).map(cb => cb.value);
+            document.getElementById('output').value = selectedValues.join(', ');
+        });
+    </script>
+</body>
+</html>
