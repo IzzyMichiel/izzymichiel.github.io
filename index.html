@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Mol Virtual PC</title>
+    <style>
+        /* Global Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            font-family: 'Courier New', Courier, monospace;
+            color: lime;
+            overflow: hidden;
+        }
+
+        #passwordScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        #passwordScreen input {
+            font-family: inherit;
+            font-size: 18px;
+            color: lime;
+            background: black;
+            border: none;
+            border-bottom: 2px solid lime;
+            outline: none;
+            width: 300px;
+            text-align: center;
+        }
+
+        #passwordScreen p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #loadingScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            color: lime;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        #desktop {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: url('wallpaper.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: none;
+        }
+
+        .icon {
+            text-align: center;
+            cursor: pointer;
+            width: 80px;
+            margin: 10px;
+        }
+
+        .icon img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .icon p {
+            color: white;
+            font-size: 14px;
+        }
+
+        /* CMD Window */
+        #cmdWindow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            color: lime;
+            padding: 10px;
+            display: none;
+            overflow-y: auto;
+            z-index: 1;
+        }
+
+        /* Video Tab */
+        #videoContainer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            width: 800px;
+            height: 500px;
+            background: #333;
+            border: 3px solid gray;
+            box-shadow: 0px 0px 20px black;
+            display: none;
+            z-index: 2;
+            opacity: 0;
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+
+        #videoContainer.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        #videoTitleBar {
+            background: gray;
+            padding: 5px;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        #videoContainer video {
+            width: 100%;
+            height: calc(100% - 30px);
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div id="passwordScreen">
+    <p>Enter Password to Unlock:</p>
+    <input id="passwordInput" type="text" readonly>
+</div>
+
+<div id="loadingScreen"></div>
+
+<div id="desktop">
+    <div class="icon" onclick="startVideoAndCmd();">
+        <img src="icon.png" alt="Video Icon">
+        <p>Play Video</p>
+    </div>
+</div>
+
+<div id="cmdWindow"></div>
+
+<div id="videoContainer">
+    <div id="videoTitleBar">Playing Video</div>
+    <video id="videoPlayer" autoplay>
+  <source src="https://drive.google.com/uc?export=download&id=1DV_xRb-wCJZH14YCyI2v48gefIF8HqkZ" type="video/mp4">
+        <source src="video.ogv" type="video/ogg">  <!-- Added .ogv fallback -->
+        <source src="video.webm" type="video/webm"> <!-- Added .webm fallback -->
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<script>
+    const passwordText = "demolweethetwachtwoord";
+    const hackerText = [
+        "Initializing system...",
+        "Authorizing access...",
+        "Decrypting user key...",
+        "Access granted.",
+    ];
+
+    let passwordIndex = 0;
+    const passwordInput = document.getElementById("passwordInput");
+
+    function simulateTyping(event) {
+        // Prevent normal key press action
+        event.preventDefault();
+
+        if (passwordIndex < passwordText.length) {
+            passwordInput.value += passwordText[passwordIndex];
+            passwordIndex++;
+			if(passwordInput.value == passwordText){
+			showLoadingScreen();
+			}
+        }
+    }
+
+    function showLoadingScreen() {
+        document.getElementById("passwordScreen").style.display = "none";
+        const loadingScreen = document.getElementById("loadingScreen");
+        loadingScreen.style.display = "block";
+
+        let hackerIndex = 0;
+
+        const loadingInterval = setInterval(() => {
+            if (hackerIndex < hackerText.length) {
+                loadingScreen.innerHTML += `> ${hackerText[hackerIndex]}<br>`;
+                hackerIndex++;
+            } else {
+                clearInterval(loadingInterval);
+                loadingScreen.style.display = "none";
+                document.getElementById("desktop").style.display = "block";
+            }
+        }, 1000);
+    }
+
+function startVideoAndCmd() {
+        const cmdWindow = document.getElementById("cmdWindow");
+        const videoContainer = document.getElementById("videoContainer");
+        const hackerCmds = ["Initializing modules...", "Loading video stream...", "Streaming data..."];
+        const ongoingHackerText = [
+            "Establishing connection...",
+            "Bypassing firewall...",
+            "Decrypting files...",
+            "Transferring data...",
+            "Accessing remote server...",
+            "Unlocking hidden partitions...",
+            "Injecting code...",
+            "Downloading encryption keys...",
+            "Bypass detected: Re-routing..."
+        ];
+        const videoPlayer = document.getElementById("videoPlayer");
+
+        // Show the CMD window and initial hacker commands
+        cmdWindow.style.display = "block";
+        let cmdIndex = 0;
+
+        const cmdInterval = setInterval(() => {
+            if (cmdIndex < hackerCmds.length) {
+                cmdWindow.innerHTML += `> ${hackerCmds[cmdIndex]}<br>`;
+                cmdIndex++;
+            } else {
+                cmdWindow.innerHTML += "> Ready.<br>";
+                clearInterval(cmdInterval);
+            }
+            cmdWindow.scrollTop = cmdWindow.scrollHeight;
+        }, 500);
+
+        // Show the video and add hacking text once it's done
+        videoContainer.style.display = "block";
+        setTimeout(() => videoContainer.classList.add("show"), 10);
+
+        // Play the video and ensure it's not muted
+        videoPlayer.play();
+        videoPlayer.muted = false;
+
+        // Simulate ongoing hacking text every 1-2 seconds
+        let ongoingIndex = 0;
+        setInterval(() => {
+            if (ongoingIndex < ongoingHackerText.length) {
+                cmdWindow.innerHTML += `> ${ongoingHackerText[ongoingIndex]}<br>`;
+                ongoingIndex++;
+            } else {
+                ongoingIndex = 0; // Loop the hacker text once it's over
+            }
+            cmdWindow.scrollTop = cmdWindow.scrollHeight;
+        }, 1500); // Update every 1.5 seconds for continuous text
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("keydown", simulateTyping);
+    });
+</script>
+
+</body>
+</html>
